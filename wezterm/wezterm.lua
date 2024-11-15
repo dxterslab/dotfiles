@@ -5,9 +5,11 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices
+-- config.enable_tab_bar = false
+config.hide_tab_bar_if_only_one_tab = true
 
 -- my coolnight colorscheme
-config.color_scheme = 'Tokyo Night Storm'
+config.color_scheme = 'Catppuccin Mocha'
 
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 15
@@ -20,7 +22,7 @@ config.tab_and_split_indices_are_zero_based = true
 
 -- config.enable_tab_bar = true
 
--- config.window_decorations = "RESIZE"
+config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.8
 config.macos_window_background_blur = 30
 
@@ -87,5 +89,46 @@ wezterm.on('update-status', function(window, _)
 
   window:set_right_status(wezterm.format(elements))
 end)
+
+-- Leader is the same as my old tmux prefix
+config.leader = { key = 'a', mods = 'SUPER', timeout_milliseconds = 1000 }
+config.keys = {
+  -- splitting
+  {
+    mods   = "LEADER",
+    key    = "-",
+    action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }
+  },
+  {
+    mods   = "LEADER",
+    key    = "=",
+    action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }
+  },
+  {
+    mods   = "LEADER",
+    key    = "x",
+    action = wezterm.action.CloseCurrentPane { confirm = true }
+  },
+  {
+    mods = 'LEADER',
+    key = 'm',
+    action = wezterm.action.TogglePaneZoomState
+  },
+  -- rotate panes
+  {
+    mods = "LEADER",
+    key = "Space",
+    action = wezterm.action.RotatePanes "Clockwise"
+  },
+  -- show the pane selection mode, but have it swap the active and selected panes
+  {
+    mods = 'LEADER',
+    key = '0',
+    action = wezterm.action.PaneSelect {
+      mode = 'SwapWithActive',
+    },
+  },
+}
+
 
 return config

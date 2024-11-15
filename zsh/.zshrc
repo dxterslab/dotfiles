@@ -12,8 +12,8 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # history setup
 HISTFILE=$HOME/.zhistory
-SAVEHIST=1000
-HISTSIZE=999
+SAVEHIST=5000
+HISTSIZE=5000
 setopt share_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
@@ -28,7 +28,7 @@ bindkey -v
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+#source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 
